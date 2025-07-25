@@ -14,7 +14,7 @@ const NoteCreate = () => {
             title:noteData.title,
             description:noteData.description,
           });
-          
+        alert('Note Added Successfully!');
         console.log(res);
         Navigate('/notes')
     }   
