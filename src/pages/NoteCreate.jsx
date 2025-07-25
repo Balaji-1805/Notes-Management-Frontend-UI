@@ -13,7 +13,8 @@ const NoteCreate = () => {
         const res=API.post('/notes/addNote', {
             title:noteData.title,
             description:noteData.description,
-        });
+          });
+          
         console.log(res);
         Navigate('/notes')
     }   

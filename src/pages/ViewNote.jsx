@@ -37,8 +37,8 @@ const ViewNote = () => {
             <span>
               Created at: <strong>{new Date(note.note.createdAt).toLocaleString()}</strong>
             </span>
-            <Link className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" to="/notes">
-              Back to Notes
+            <Link className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition" to="/notes">
+              ⬅ Back to Notes
             </Link>
           </div>
         </div>

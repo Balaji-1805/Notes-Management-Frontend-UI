@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note,deleteNote }) => {
   const formattedDate = new Date(note.createdAt).toLocaleString("en-IN", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -33,8 +33,8 @@ const NoteCard = ({ note }) => {
         </Link>
         <button
           className="bg-red-500 text-white py-1 px-3 rounded-md text-sm hover:bg-red-600 transition"
-        >
-          Delete
+          onClick={()=>{deleteNote(note._id)}}
+        >Delete
         </button>
       </div>
     </div>
