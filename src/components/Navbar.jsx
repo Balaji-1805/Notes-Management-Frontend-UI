@@ -42,7 +42,7 @@ const Navbar = () => {
           <>
             <li><Link to="/notes">View Notes</Link></li>
             <li><Link to="/createNotes">Create Notes</Link></li>
-            <li><button onClick={handleLogout}>Logout</button></li>
+            <li><button className="hover:cursor-pointer" onClick={handleLogout}>Logout</button></li>
           </>
         )}
       </ul>
