@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:4000", // 
+  baseURL: "https://notes-management-frontend-ui.vercel.app", // 
 });
 
 API.interceptors.request.use((req) => {
