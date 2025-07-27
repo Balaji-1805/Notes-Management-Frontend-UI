@@ -1,69 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react';
 import API from '../api/api';
-import { useState } from 'react';
 
 const ForgotPassword = () => {
-    const [email,setEmail]=useState('');
-    const forgotPassword = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await API.post('/user/forgot-password', { email });
-            console.log(res);
-            setEmail('');
-            if (res.status === 200) {
-            alert('Email Sent Successfully, please check it');
-            }
-        } catch (err) {
-            console.error(err);
-            alert('Failed to send reset link. Please try again.');
-        }
-        };
-  return (
-    <div>
-        <div className="login-field bg-gray-100 w-[40%] m-auto my-10">
-                <div className="flex min-h-full flex-1 flex-col justify-center px-1 lg:px-8">
-                  <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl leading-9 font-bold tracking-tight text-gray-900">
-                      Email Verification
-                    </h2>
-                  </div>
-        
-                  <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm" >
-                    <form  className="space-y-6" onSubmit={forgotPassword}>
-                      <div>
-                        <label htmlFor="email" className="block text-sm leading-6 font-medium text-gray-900">
-                          Email address
-                        </label>
-                        <div className="mt-2">
-                          <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            required
-                            autoComplete="email"
-                            value={email}
-                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 sm:text-sm leading-6"
-                            onChange={(e)=>{
-                                setEmail(e.target.value)
-                            }}
-                          />
-                        </div>
-                      </div>
-        
-                      <div>
-                        <button
-                          type="submit"
-                          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm leading-6 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                          >  
-                        Send Email Link
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-    </div>
-  )
-}
+  const [email, setEmail] = useState('');
 
-export default ForgotPassword
+  const forgotPassword = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await API.post('/user/forgot-password', { email });
+      setEmail('');
+      if (res.status === 200) {
+        alert('Email Sent Successfully, please check it');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to send reset link. Please try again.');
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-center text-2xl font-bold text-gray-900 mb-6">
+          Email Verification
+        </h2>
+        <form onSubmit={forgotPassword} className="space-y-5">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-500 transition"
+          >
+            Send Email Link
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default ForgotPassword;
