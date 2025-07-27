@@ -3,10 +3,12 @@ import API from '../api/api';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [isClicked,setIsClicked]=useState(false);
 
   const forgotPassword = async (e) => {
   e.preventDefault();
   try {
+    setIsClicked(true);
     const res = await API.post('/user/forgot-password', { email });
     const data = res.data;
 
@@ -18,6 +20,10 @@ const ForgotPassword = () => {
   } catch (err) {
     console.error("Error in forgotPassword:", err);
     alert('Failed to send reset link. Please try again.');
+  }
+  finally
+  {
+    setIsClicked(false);
   }
 };
 
@@ -43,11 +49,11 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <button
+          <button disabled={isClicked}
             type="submit"
             className="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-500 transition"
           >
-            Send Email Link
+            {isClicked? "Sending Email":"Send Email Link"}
           </button>
         </form>
       </div>
