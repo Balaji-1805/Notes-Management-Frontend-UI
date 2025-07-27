@@ -8,19 +8,16 @@ const ForgotPassword = () => {
   e.preventDefault();
   try {
     const res = await API.post('/user/forgot-password', { email });
+    const data = res.data;
 
-    if (res.data.message === "Reset link Sent") {
-      alert("Reset link sent to your email.");
+    if (data.message === "Reset link Sent") {
+      alert("Password reset link has been sent to your email.");
     } else {
-      alert(res.data.message); // shows "Invalid Email, Please Enter Valid Email"
+      alert(data.message); // handles "Invalid Email, Please Enter Valid Email"
     }
-
   } catch (err) {
-  if (err.response?.status === 400) {
-    alert(err.response.data.message); // Invalid email message
-  } else {
-    alert("Server error. Please try again later.");
-  }
+    console.error("Error in forgotPassword:", err);
+    alert('Failed to send reset link. Please try again.');
   }
 };
 
