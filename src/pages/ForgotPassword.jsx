@@ -24,6 +24,7 @@ const ForgotPassword = () => {
   finally
   {
     setIsClicked(false);
+    setEmail('');
   }
 };
 
