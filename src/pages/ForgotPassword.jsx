@@ -5,18 +5,24 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
 
   const forgotPassword = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await API.post('/user/forgot-password', { email });
-      setEmail('');
-      if (res.status === 200) {
-        alert('Email Sent Successfully, please check it');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Failed to send reset link. Please try again.');
+  e.preventDefault();
+  try {
+    const res = await API.post('/user/forgot-password', { email });
+
+    if (res.data.message === "Reset link Sent") {
+      alert("Reset link sent to your email.");
+    } else {
+      alert(res.data.message); // shows "Invalid Email, Please Enter Valid Email"
     }
-  };
+
+  } catch (err) {
+  if (err.response?.status === 400) {
+    alert(err.response.data.message); // Invalid email message
+  } else {
+    alert("Server error. Please try again later.");
+  }
+  }
+};
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
